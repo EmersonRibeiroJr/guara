@@ -1,0 +1,15 @@
+[Unit]
+Description=Servidor de localizacao GPS (T-PCIE SIM7070G)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+# Ajuste User e caminhos se o seu usuario nao for "pi"
+User=pi
+WorkingDirectory=/home/pi/tpcie-gps-server
+ExecStart=/home/pi/tpcie-gps-server/venv/bin/gunicorn -w 1 -b 0.0.0.0:8000 app:app
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
